@@ -60,11 +60,16 @@ public class ViewController {
 			distance += 10;
 			step++;
 			for (int i = 0; i < step * 4; i++) {
-				dx = (float) (distance * Math.cos(90 - 360 / (step * 4 * 2) * i));
-				dy = (float) (distance * Math.sin(90 - 360 / (step * 4 * 2) * i));
+				dx = (float) (distance * Math.sin(360 / (step * 4 * 2) * i));
+				dy = (float) (distance * Math.cos(360 / (step * 4 * 2) * i));
 				sparks.add(new Spark(centerX + dx, centerY + dy, step));
 			}
-			
+			for (int i = sparks.size() - 1; i >= 0; i--) {
+				if (sparks.get(i).step == step - 10) {
+					sparks.remove(i);
+				}
+			}
+
 		}
 		
 		public void drawSparks() {
