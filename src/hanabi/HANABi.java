@@ -1,18 +1,34 @@
 package hanabi;
 
-import processing.core.PApplet;
+public class HANABi {
+
+	public int x;
+	public int y;
+	public int count;
+	public boolean catched;
 
 
-public class HANABi extends PApplet {
+	public HANABi(int x, int y) {
 
-	public void setup() {
-		size(100, 100);
+		this.x = x;
+		this.y = y;
+		this.count = 5;
+		this.catched = false;
 	}
 
-	public void draw() {
+	public void move() {
+
+		this.y = this.y -1;
+		
+		return;
 	}
-	
-	public static void main(String _args[]) {
-		PApplet.main(new String[] { hanabi.HANABi.class.getName() });
+
+	public boolean isAlive() {
+
+		if (this.count <= 0) {
+			return false;
+		}
+
+		return true;
 	}
 }
