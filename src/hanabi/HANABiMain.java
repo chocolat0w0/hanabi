@@ -47,8 +47,8 @@ public class HANABiMain extends PApplet {
 		if (key == ' ') {
 			for (int i = hanabi.size() - 1; i >= 0; i--) {
 				if (hanabi.get(i).catched) {
-					hanabi.remove(i);
 					viewController.explode(hanabi.get(i));
+					hanabi.remove(i);
 				}
 			}
 		}
