@@ -45,12 +45,7 @@ public class HANABiMain extends PApplet {
 	public void keyPressed() {
 
 		if (key == ' ') {
-			for (int i = hanabi.size() - 1; i >= 0; i--) {
-				if (hanabi.get(i).catched) {
-					viewController.explode(hanabi.get(i));
-					hanabi.remove(i);
-				}
-			}
+			_explodeHanabi();
 		}
 	}
 
@@ -60,8 +55,9 @@ public class HANABiMain extends PApplet {
 
 			Random rand = new Random();
 
-			int num = rand.nextInt(500);
-			hanabi.add(new HANABi(num, height));
+			int x = rand.nextInt(500);
+			int speed = rand.nextInt(3) + 1;
+			hanabi.add(new HANABi(x, height, speed));
 		}
 	}
 	
@@ -78,6 +74,35 @@ public class HANABiMain extends PApplet {
 		for (HANABi h : hanabi) {
 			h.move();
 		}
+	}
+	
+	private void _explodeHanabi() {
+		
+		if (!_isExplodable()) {
+			return;
+		}
+		
+		for (int i = hanabi.size() - 1; i >= 0; i--) {
+			if (hanabi.get(i).catched) {
+				viewController.explode(hanabi.get(i));
+				hanabi.remove(i);
+			}
+		}
+	}
+	
+	private boolean _isExplodable() {
+		
+		int count = 0;
+		for (HANABi h : hanabi) {
+			if (h.catched) {
+				count++;
+			}
+		}
+		
+		if (count > 2) {
+			return true;
+		}
+		return false;
 	}
 
 	public static void main(String _args[]) {
