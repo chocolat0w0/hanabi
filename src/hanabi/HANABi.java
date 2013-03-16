@@ -12,20 +12,19 @@ public class HANABi {
 
 		this.x = x;
 		this.y = y;
-		this.count = 5;
 		this.catched = false;
 	}
 
 	public void move() {
 
-		this.y = this.y -1;
+		this.y = this.y -5;
 		
 		return;
 	}
 
 	public boolean isAlive() {
 
-		if (this.count <= 0) {
+		if (this.y <= 50) {
 			return false;
 		}
 
