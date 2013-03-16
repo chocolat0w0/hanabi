@@ -17,7 +17,7 @@ public class HANABi {
 
 	public void move() {
 
-		this.y = this.y -5;
+		this.y = this.y -1;
 		
 		return;
 	}
