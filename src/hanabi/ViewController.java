@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class ViewController {
+	
+	private static final int EXPLODABLE_STEP = 30;
 
 	PApplet parent;
 	private ArrayList<ExplodeHanabi> explodeHanabis = new ArrayList<ExplodeHanabi>();
@@ -33,6 +35,15 @@ public class ViewController {
 			explodeHanabi.drawSparks();
 			
 		}
+		for (int i = explodeHanabis.size() - 1; i >= 0; i--) {
+			boolean explodable = explodeHanabis.get(i).update();
+			if (explodable) {
+				explodeHanabis.get(i).drawSparks();
+			}
+			else {
+				explodeHanabis.remove(i);
+			}
+		}
 	}
 
 	public void catchHanabi(HANABi hanabi) {
@@ -56,9 +67,12 @@ public class ViewController {
 			this.distance = 0;
 		}
 		
-		public void update() {
+		public boolean update() {
 			distance += 10;
 			step++;
+			if (EXPLODABLE_STEP < step) {
+				return false;
+			}
 			for (int i = 0; i < step * 4; i++) {
 				dx = (float) (distance * Math.sin(360 / (step * 4 * 2) * i));
 				dy = (float) (distance * Math.cos(360 / (step * 4 * 2) * i));
@@ -69,7 +83,7 @@ public class ViewController {
 					sparks.remove(i);
 				}
 			}
-
+			return true;
 		}
 		
 		public void drawSparks() {

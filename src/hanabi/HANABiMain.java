@@ -6,22 +6,25 @@ import java.util.Random;
 import processing.core.PApplet;
 
 public class HANABiMain extends PApplet {
-
+	private static final int BACKGROUND_GRAY = 80;
+	private static final int INTERVAL = 40;
+	private static final int WINDOW_SIZE = 500;
+	private static final int FRAME_RATE = 30;
 	ViewController viewController = null;
 	ArrayList<HANABi> hanabi = new ArrayList<HANABi>();
 	private int time = 0;
-	private static final int interval = 40;
 
 	public void setup() {
 		viewController = new ViewController(this);
-		size(500, 500);
-		frameRate(30);
-		background(80);
+		size(WINDOW_SIZE, WINDOW_SIZE);
+		frameRate(FRAME_RATE);
+		background(BACKGROUND_GRAY);
 	}
 
 	public void draw() {
 		
-		background(80);
+		fill(BACKGROUND_GRAY, 30);
+		rect(0, 0, width, height);
 		
 		_createHanabi();
 
@@ -51,7 +54,7 @@ public class HANABiMain extends PApplet {
 
 	private void _createHanabi() {
 		time++;
-		if (time % interval == 0) {
+		if (time % INTERVAL == 0) {
 
 			Random rand = new Random();
 
