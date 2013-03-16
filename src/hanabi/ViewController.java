@@ -30,11 +30,7 @@ public class ViewController {
 			}
 			parent.ellipse(h.x, h.y, 30, 30);
 		}
-		for(ExplodeHanabi explodeHanabi : explodeHanabis) {
-			explodeHanabi.update();
-			explodeHanabi.drawSparks();
-			
-		}
+
 		for (int i = explodeHanabis.size() - 1; i >= 0; i--) {
 			boolean explodable = explodeHanabis.get(i).update();
 			if (explodable) {
