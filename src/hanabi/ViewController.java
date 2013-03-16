@@ -1,5 +1,7 @@
 package hanabi;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class ViewController {
@@ -13,7 +15,7 @@ public class ViewController {
 	public void explode(HANABi hanabi) {
 	}
 	
-	public void drawHanabi(HANABi[] hanabi) {
+	public void drawHanabi(ArrayList<HANABi> hanabi) {
 		for (HANABi h : hanabi) {
 			parent.noStroke();
 			if(h.catched == true) {
