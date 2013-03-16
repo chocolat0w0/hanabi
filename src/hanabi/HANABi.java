@@ -4,20 +4,21 @@ public class HANABi {
 
 	public int x;
 	public int y;
-	public int count;
+	public int speed;
 	public boolean catched;
 
 
-	public HANABi(int x, int y) {
+	public HANABi(int x, int y, int speed) {
 
 		this.x = x;
 		this.y = y;
+		this.speed = speed;
 		this.catched = false;
 	}
 
 	public void move() {
 
-		this.y = this.y -1;
+		this.y = this.y - this.speed;
 		
 		return;
 	}
