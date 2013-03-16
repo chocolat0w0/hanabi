@@ -40,8 +40,22 @@ public class HANABiMain extends PApplet {
 	}
 	
 	public void keyPressed() {
+		ArrayList<Integer> num = new ArrayList<Integer>();
+		
 		if(key == 'a') {
 			background(255, 0, 0);
+			for (HANABi h : hanabi) {
+				if(h.catched) {
+					num.add(hanabi.indexOf(h));
+//					hanabi.remove(hanabi.indexOf(h));
+				}
+			}
+			for(Integer i : num) {
+				hanabi.remove(hanabi.get(i));
+				for(Integer j : num) {
+					j = 0;
+				}
+			}
 		}
 	}
 	
