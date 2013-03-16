@@ -23,13 +23,17 @@ public class HANABiMain extends PApplet {
 	public void draw() {
 		time++;
 		if (time % interval == 0) {
-		    //Randomクラスのインスタンス化
 	        Random rand = new Random();
 
 	        int num = rand.nextInt(500);
 	 		hanabi.add(new HANABi(num, height));
 		}
 		
+		for(int i = hanabi.size() - 1 ; i >= 0 ; i-- ) {
+			if (!hanabi.get(i).isAlive()) {
+				hanabi.remove(i);
+			}
+		}
 		background(80);
 		
 		viewController.drawHanabi(hanabi);
@@ -49,19 +53,11 @@ public class HANABiMain extends PApplet {
 	}
 	
 	public void keyPressed() {
-		ArrayList<Integer> num = new ArrayList<Integer>();
 		
 		if(key == 'a') {
-			background(255, 0, 0);
-			for (HANABi h : hanabi) {
-				if(h.catched) {
-					num.add(hanabi.indexOf(h));
-				}
-			}
-			for(Integer i : num) {
-				hanabi.remove(hanabi.get(i));
-				for(int j = num.indexOf(i); j < num.size(); j++) {
-					num.set(j, num.get(j)-1);
+			for(int i = hanabi.size() - 1 ; i >= 0 ; i-- ) {
+				if (hanabi.get(i).catched) {
+					hanabi.remove(i);
 				}
 			}
 		}
