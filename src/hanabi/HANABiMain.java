@@ -1,6 +1,7 @@
 package hanabi;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import processing.core.PApplet;
 
@@ -9,20 +10,28 @@ public class HANABiMain extends PApplet {
 	
 	ViewController viewController = null;
 	ArrayList<HANABi> hanabi = new ArrayList<HANABi>();
+	private int time = 0;
+	private static final int interval = 40;
 
 	public void setup() {
 		viewController = new ViewController(this);
 		size(500, 500);
 		frameRate(30);
 		background(80);
-		
-		hanabi.add(new HANABi(100, height));
-		hanabi.add(new HANABi(200, height));
-		hanabi.add(new HANABi(300, height));
 	}
 
 	public void draw() {
+		time++;
+		if (time % interval == 0) {
+		    //Randomクラスのインスタンス化
+	        Random rand = new Random();
+
+	        int num = rand.nextInt(500);
+	 		hanabi.add(new HANABi(num, height));
+		}
+		
 		background(80);
+		
 		viewController.drawHanabi(hanabi);
 		for (HANABi h : hanabi) {
 			h.move();
