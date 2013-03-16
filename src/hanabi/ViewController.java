@@ -64,6 +64,7 @@ public class ViewController {
 				dy = (float) (distance * Math.sin(90 - 360 / (step * 4 * 2) * i));
 				sparks.add(new Spark(centerX + dx, centerY + dy, step));
 			}
+			
 		}
 		
 		public void drawSparks() {

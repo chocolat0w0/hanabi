@@ -20,15 +20,6 @@ public class HANABiMain extends PApplet {
 	}
 
 	public void draw() {
-<<<<<<< HEAD
-		time++;
-		if (time % interval == 0) {
-	        Random rand = new Random();
-	        int num = rand.nextInt(500);
-	 		hanabi.add(new HANABi(num, height));
-		}
-=======
->>>>>>> e30b2f692c31ac65d5fcd6ed4b8e4288aaf8cb37
 		
 		background(80);
 		
@@ -57,16 +48,9 @@ public class HANABiMain extends PApplet {
 			for (int i = hanabi.size() - 1; i >= 0; i--) {
 				if (hanabi.get(i).catched) {
 					hanabi.remove(i);
+					viewController.explode(hanabi.get(i));
 				}
 			}
-<<<<<<< HEAD
-			for(Integer i : num) {
-				hanabi.remove(hanabi.get(i));
-				viewController.explode(hanabi.get(i));
-				for(int j = num.indexOf(i); j < num.size(); j++) {
-					num.set(j, num.get(j)-1);
-				}
-=======
 		}
 	}
 
@@ -86,7 +70,6 @@ public class HANABiMain extends PApplet {
 		for (int i = hanabi.size() - 1; i >= 0; i--) {
 			if (!hanabi.get(i).isAlive()) {
 				hanabi.remove(i);
->>>>>>> e30b2f692c31ac65d5fcd6ed4b8e4288aaf8cb37
 			}
 		}
 	}
