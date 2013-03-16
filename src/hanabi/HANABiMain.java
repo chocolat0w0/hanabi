@@ -23,9 +23,7 @@ public class HANABiMain extends PApplet {
 	public void draw() {
 		time++;
 		if (time % interval == 0) {
-		    //Randomクラスのインスタンス化
 	        Random rand = new Random();
-
 	        int num = rand.nextInt(500);
 	 		hanabi.add(new HANABi(num, height));
 		}
@@ -60,6 +58,7 @@ public class HANABiMain extends PApplet {
 			}
 			for(Integer i : num) {
 				hanabi.remove(hanabi.get(i));
+				viewController.explode(hanabi.get(i));
 				for(int j = num.indexOf(i); j < num.size(); j++) {
 					num.set(j, num.get(j)-1);
 				}
