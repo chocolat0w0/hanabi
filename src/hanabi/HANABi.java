@@ -2,6 +2,7 @@ package hanabi;
 
 public class HANABi {
 
+	private int centerX;
 	public int x;
 	public int y;
 	public int radius;
@@ -11,10 +12,12 @@ public class HANABi {
 	public int sparkSize;
 	public int speed;
 	public boolean catched;
+	private int step;
 
 
 	public HANABi(int x, int y, int radius, int r, int g, int b, int sparkSize, int speed) {
 
+		this.centerX = x;
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
@@ -24,12 +27,15 @@ public class HANABi {
 		this.sparkSize = sparkSize;
 		this.speed = speed;
 		this.catched = false;
+		this.step = 0;
 	}
 
 	public void move() {
 
 		this.y = this.y - this.speed;
+		this.x = centerX + (int)(2 * Math.sin(step / 2));
 		
+		step++;
 		return;
 	}
 
