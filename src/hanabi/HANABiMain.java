@@ -53,8 +53,7 @@ public class HANABiMain extends PApplet {
 		if (key == ' ') {
 			_explodeHanabi();
 		}
-
-		// ?f?o?b?O?p?̃R?s?y?R?[?h
+		
 		if (key == 'a') {
 			for (int i = hanabis.size() - 1; i >= 0; i--) {
 				if (hanabis.get(i).catched) {
