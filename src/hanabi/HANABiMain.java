@@ -9,7 +9,8 @@ import processing.core.PImage;
 public class HANABiMain extends PApplet {
 	private static final int BACKGROUND_GRAY = 80;
 	private static final int INTERVAL = 20;
-	private static final int WINDOW_SIZE = 500;
+	private static final int WINDOW_H = 500;
+	private static final int WINDOW_W = 625;
 	private static final int FRAME_RATE = 30;
 
 	private int time = 0;
@@ -21,14 +22,14 @@ public class HANABiMain extends PApplet {
 
 	public void setup() {
 		viewController = new ViewController(this);
-		size(WINDOW_SIZE, WINDOW_SIZE);
+		size(WINDOW_W, WINDOW_H);
 		frameRate(FRAME_RATE);
 		background(BACKGROUND_GRAY);
 	}
 
 	public void draw() {
 		tint(255, 50);
-		image(yakei, 0, 0, 500, 500);
+		image(yakei, 0, 0, WINDOW_W, WINDOW_H);
 		fill(BACKGROUND_GRAY, 30);
 		rect(0, 0, width, height);
 
