@@ -30,12 +30,12 @@ public class ViewController {
 		for (HANABi h : hanabi) {
 			parent.noStroke();
 			if(h.catched == true) {
-				parent.fill(100);
+				drawCatchHanabi(h);
 			}
 			else {
 				parent.fill(h.r, h.g, h.b);
+				parent.ellipse(h.x, h.y, 30, 30);
 			}
-			parent.ellipse(h.x, h.y, 30, 30);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class ViewController {
 	}
 
 	public void drawCatchHanabi(HANABi hanabi) {
-		parent.fill(0);
+		parent.fill(255, 0, 0);
 		parent.ellipse(hanabi.x, hanabi.y, 30, 30);
 	}
 	
