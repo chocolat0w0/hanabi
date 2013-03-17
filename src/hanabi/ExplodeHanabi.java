@@ -8,16 +8,17 @@ public class ExplodeHanabi {
 	private static final int EXPLODABLE_STEP = 30;
 
 	private PApplet parent;
-	float centerX;
-	float centerY;
-	int colorR;
-	int colorG;
-	int colorB;
-	float dx;
-	float dy;
-	float distance;
-	int step;
-	ArrayList<Spark> sparks = new ArrayList<Spark>();
+	private float centerX;
+	private float centerY;
+	private int colorR;
+	private int colorG;
+	private int colorB;
+	private int sparkSize;
+	private float dx;
+	private float dy;
+	private float distance;
+	private int step;
+	private ArrayList<Spark> sparks = new ArrayList<Spark>();
 	
 	public ExplodeHanabi(HANABi hanabi, PApplet parent) {
 		this.parent = parent;
@@ -26,6 +27,7 @@ public class ExplodeHanabi {
 		this.colorR = hanabi.r;
 		this.colorG = hanabi.g;
 		this.colorB = hanabi.b;
+		this.sparkSize = hanabi.sparkSize;
 	}
 
 	public boolean update() {
@@ -37,7 +39,7 @@ public class ExplodeHanabi {
 		for (int i = 0; i < step * 4; i++) {
 			dx = (float) (distance * Math.sin(360 / (step * 4 * 2) * i));
 			dy = (float) (distance * Math.cos(360 / (step * 4 * 2) * i));
-			sparks.add(new Spark(centerX + dx, centerY + dy, step));
+			sparks.add(new Spark(centerX + dx, centerY + dy, step, sparkSize));
 		}
 		for (int i = sparks.size() - 1; i >= 0; i--) {
 			if (sparks.get(i).step == step - 10) {
@@ -50,7 +52,7 @@ public class ExplodeHanabi {
 	public void drawSparks() {
 		for(Spark spark : sparks) {
 			parent.fill(colorR, colorG, colorB);
-			parent.ellipse(spark.x, spark.y, 10, 10);
+			parent.ellipse(spark.x, spark.y, spark.sparkSize, spark.sparkSize);
 		}
 	}
 	

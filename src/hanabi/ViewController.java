@@ -6,9 +6,7 @@ import java.util.Iterator;
 import processing.core.PApplet;
 
 public class ViewController {
-	
-	private static final float RADIUS = 15;
-	
+		
 	private PApplet parent;
 	private ArrayList<ExplodeHanabi> explodeHanabis = new ArrayList<ExplodeHanabi>();
 	private Iterator<ExplodeHanabi> iter = explodeHanabis.iterator();
@@ -34,7 +32,7 @@ public class ViewController {
 			}
 			else {
 				parent.fill(h.r, h.g, h.b);
-				parent.ellipse(h.x, h.y, 30, 30);
+				parent.ellipse(h.x, h.y, h.radius * 2, h.radius * 2);
 			}
 		}
 	}
@@ -56,9 +54,9 @@ public class ViewController {
 
 	public void drawCatchHanabi(HANABi hanabi) {
 		parent.fill(hanabi.r + 20, hanabi.g + 20, hanabi.b + 20);
-		parent.ellipse(hanabi.x, hanabi.y, RADIUS * 2, RADIUS * 2);
+		parent.ellipse(hanabi.x, hanabi.y, hanabi.radius * 2, hanabi.radius * 2);
 		parent.noFill();
 		parent.stroke(255, 0, 0);
-		parent.rect(hanabi.x - RADIUS, hanabi.y - RADIUS, RADIUS * 2, RADIUS * 2);
+		parent.rect(hanabi.x - hanabi.radius, hanabi.y - hanabi.radius, hanabi.radius * 2, hanabi.radius * 2);
 	}
 }
