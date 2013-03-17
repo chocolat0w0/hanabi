@@ -24,8 +24,8 @@ public class HANABiMain extends PApplet {
 	}
 
 	public void draw() {
+		tint(255, 50);
 		image(image, 0, 0, 500, 500);
-
 		fill(BACKGROUND_GRAY, 30);
 		rect(0, 0, width, height);
 
