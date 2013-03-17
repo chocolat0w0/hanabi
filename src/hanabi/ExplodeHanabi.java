@@ -3,6 +3,7 @@ package hanabi;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class ExplodeHanabi {
 	private static final int EXPLODABLE_STEP = 30;
@@ -19,6 +20,7 @@ public class ExplodeHanabi {
 	private float distance;
 	private int step;
 	private ArrayList<Spark> sparks = new ArrayList<Spark>();
+	PImage sprite;
 	
 	public ExplodeHanabi(HANABi hanabi, PApplet parent) {
 		this.parent = parent;
@@ -28,12 +30,14 @@ public class ExplodeHanabi {
 		this.colorG = hanabi.g;
 		this.colorB = hanabi.b;
 		this.sparkSize = hanabi.sparkSize;
+		this.sprite = parent.loadImage("sprite.png");
 	}
 
 	public boolean update() {
 		distance += 10;
 		step++;
 		if (EXPLODABLE_STEP < step) {
+			_drawSprite();
 			return false;
 		}
 		for (int i = 0; i < step * 4; i++) {
@@ -55,5 +59,10 @@ public class ExplodeHanabi {
 			parent.ellipse(spark.x, spark.y, spark.sparkSize, spark.sparkSize);
 		}
 	}
-	
+
+	private void _drawSprite() {
+		for(Spark spark : sparks) {
+			parent.image(sprite, spark.x, spark.y, spark.sparkSize * 10, spark.sparkSize * 4);
+		}
+	}
 }
