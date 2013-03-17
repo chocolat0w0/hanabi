@@ -40,10 +40,15 @@ public class HANABiMain extends PApplet {
 
 		_moveAllHanabi();
 		
+		_showScore();
+		
+	}
+	
+	private void _showScore() {
 		fill(255);
 		textSize(16);
-		text(totalScore, 10, 20);
-		text(score, 10, 40);
+		text("total : " + totalScore, 10, 20);
+		text("explode : " + score, 10, 40);
 	}
 
 	public void mousePressed() {
@@ -132,11 +137,11 @@ public class HANABiMain extends PApplet {
 				hanabis.remove(i);
 			}
 		}
+		totalScore = totalScore + score;
 	}
 	
 	private void _calcPoint(HANABi hanabi) {
 		score = score + hanabi.y * hanabi.radius * hanabi.speed / 100;
-		totalScore = totalScore + score;
 	}
 
 	private boolean _isExplodable() {
