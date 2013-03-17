@@ -57,6 +57,7 @@ public class ViewController {
 	public void drawCatchHanabi(HANABi hanabi) {
 		parent.fill(255, 0, 0);
 		parent.ellipse(hanabi.x, hanabi.y, 30, 30);
+		parent.rect(hanabi.x, hanabi.y, 30, 30);
 	}
 	
 	class ExplodeHanabi {
