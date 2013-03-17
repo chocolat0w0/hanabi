@@ -18,7 +18,7 @@ public class ViewController {
 	}
 	
 	public void explode(HANABi hanabi) {
-		explodeHanabis.add(new ExplodeHanabi(hanabi.x, hanabi.y));
+		explodeHanabis.add(new ExplodeHanabi(hanabi));
 	}
 	
 	public void drawHanabi(ArrayList<HANABi> hanabi) {
@@ -33,7 +33,6 @@ public class ViewController {
 				parent.fill(100);
 			}
 			else {
-//				parent.fill(200);
 				parent.fill(h.r, h.g, h.b);
 			}
 			parent.ellipse(h.x, h.y, 30, 30);
@@ -63,6 +62,9 @@ public class ViewController {
 	class ExplodeHanabi {
 		float centerX;
 		float centerY;
+		int colorR;
+		int colorG;
+		int colorB;
 		float dx;
 		float dy;
 		float distance;
@@ -76,6 +78,14 @@ public class ViewController {
 			this.distance = 0;
 		}
 		
+		public ExplodeHanabi(HANABi hanabi) {
+			this.centerX = hanabi.x;
+			this.centerY = hanabi.y;
+			this.colorR = hanabi.r;
+			this.colorG = hanabi.g;
+			this.colorB = hanabi.b;
+		}
+
 		public boolean update() {
 			distance += 10;
 			step++;
@@ -97,6 +107,7 @@ public class ViewController {
 		
 		public void drawSparks() {
 			for(Spark spark : sparks) {
+				parent.fill(colorR, colorG, colorB);
 				parent.ellipse(spark.x, spark.y, 10, 10);
 			}
 		}
