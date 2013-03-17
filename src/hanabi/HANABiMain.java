@@ -8,7 +8,7 @@ import processing.core.PImage;
 
 public class HANABiMain extends PApplet {
 	private static final int BACKGROUND_GRAY = 80;
-	private static final int INTERVAL = 40;
+	private static final int INTERVAL = 20;
 	private static final int WINDOW_SIZE = 500;
 	private static final int FRAME_RATE = 30;
 	ViewController viewController = null;
@@ -72,10 +72,16 @@ public class HANABiMain extends PApplet {
 
 			int x = rand.nextInt(500);
 			int speed = rand.nextInt(3) + 1;
-			int r = rand.nextInt(180) + 55;
-			int g = rand.nextInt(180) + 55;
-			int b = rand.nextInt(180) + 55;
-			hanabis.add(new HANABi(x, height, r, g, b, speed));
+			
+			int r = rand.nextInt(2);
+			int g = rand.nextInt(2);
+			int b = rand.nextInt(2);
+			while (r == 0 && g == 0 && b == 0) {
+				r = rand.nextInt(2);
+				g = rand.nextInt(2);
+				b = rand.nextInt(2);
+			}
+			hanabis.add(new HANABi(x, height, r * 255 + 100, g * 255 + 100, b * 255 + 100, speed));
 		}
 	}
 
