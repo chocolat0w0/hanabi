@@ -3,10 +3,10 @@ package hanabi;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class ExplodeHanabi {
 	private static final int EXPLODABLE_STEP = 30;
+	private static final int SPARKABLE_STEP = 10;
 
 	private PApplet parent;
 	private float centerX;
@@ -20,7 +20,7 @@ public class ExplodeHanabi {
 	private float distance;
 	private int step;
 	private ArrayList<Spark> sparks = new ArrayList<Spark>();
-	PImage sprite;
+	private ArrayList<Sprite> sprites  = new ArrayList<Sprite>();
 	
 	public ExplodeHanabi(HANABi hanabi, PApplet parent) {
 		this.parent = parent;
@@ -30,39 +30,49 @@ public class ExplodeHanabi {
 		this.colorG = hanabi.g;
 		this.colorB = hanabi.b;
 		this.sparkSize = hanabi.sparkSize;
-		this.sprite = parent.loadImage("sprite.png");
 	}
 
-	public boolean update() {
+	public boolean updateSparks() {
 		distance += 10;
 		step++;
-		if (EXPLODABLE_STEP < step) {
-			_drawSprite();
-			return false;
+		if (step < EXPLODABLE_STEP) {
+			for (int i = 0; i < step * 4; i++) {
+				dx = (float) (distance * Math.sin(360 / (step * 4 * 2) * i));
+				dy = (float) (distance * Math.cos(360 / (step * 4 * 2) * i));
+				sparks.add(new Spark(centerX + dx, centerY + dy, step, sparkSize));
+			}
+			for (int i = sparks.size() - 1; i >= 0; i--) {
+				if (sparks.get(i).step == step - 10) {
+					sparks.remove(i);
+				}
+			}
+			return true;
 		}
-		for (int i = 0; i < step * 4; i++) {
-			dx = (float) (distance * Math.sin(360 / (step * 4 * 2) * i));
-			dy = (float) (distance * Math.cos(360 / (step * 4 * 2) * i));
-			sparks.add(new Spark(centerX + dx, centerY + dy, step, sparkSize));
+		else if (step == EXPLODABLE_STEP) {
+			for(int i = sparks.size() - 1; i >=sparks.size() - step * 4 * 2; i--) {
+				sprites.add(new Sprite(sparks.get(i).x, sparks.get(i).y, parent));
+			}
+			return true;
 		}
-		for (int i = sparks.size() - 1; i >= 0; i--) {
-			if (sparks.get(i).step == step - 10) {
-				sparks.remove(i);
+		else if (EXPLODABLE_STEP < step) {
+			if(EXPLODABLE_STEP + SPARKABLE_STEP < step) {
+				sprites.removeAll(sprites);
+				return false;
+			}
+			else {
+				for (Sprite s : sprites) {
+					s.drawRandom();
+				}
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	public void drawSparks() {
 		for(Spark spark : sparks) {
-			parent.fill(colorR, colorG, colorB);
+			parent.fill(colorR, colorG, colorB, 95);
 			parent.ellipse(spark.x, spark.y, spark.sparkSize, spark.sparkSize);
-		}
-	}
-
-	private void _drawSprite() {
-		for(Spark spark : sparks) {
-			parent.image(sprite, spark.x, spark.y, spark.sparkSize * 10, spark.sparkSize * 4);
 		}
 	}
 }
