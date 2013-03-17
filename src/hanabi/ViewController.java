@@ -7,8 +7,8 @@ import processing.core.PApplet;
 
 public class ViewController {
 	
-	private static final int EXPLODABLE_STEP = 30;
-
+	private static final float RADIUS = 15;
+	
 	private PApplet parent;
 	private ArrayList<ExplodeHanabi> explodeHanabis = new ArrayList<ExplodeHanabi>();
 	private Iterator<ExplodeHanabi> iter = explodeHanabis.iterator();
@@ -55,8 +55,10 @@ public class ViewController {
 	}
 
 	public void drawCatchHanabi(HANABi hanabi) {
-		parent.fill(255, 0, 0);
-		parent.ellipse(hanabi.x, hanabi.y, 30, 30);
-		parent.rect(hanabi.x, hanabi.y, 30, 30);
+		parent.noFill();
+		parent.stroke(255, 0, 0);
+		parent.rect(hanabi.x - RADIUS, hanabi.y - RADIUS, RADIUS * 2, RADIUS * 2);
+		parent.fill(100);
+		parent.ellipse(hanabi.x, hanabi.y, RADIUS * 2, RADIUS * 2);
 	}
 }
