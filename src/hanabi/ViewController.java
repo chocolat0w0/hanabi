@@ -33,7 +33,8 @@ public class ViewController {
 				parent.fill(100);
 			}
 			else {
-				parent.fill(200);
+//				parent.fill(200);
+				parent.fill(h.r, h.g, h.b);
 			}
 			parent.ellipse(h.x, h.y, 30, 30);
 		}
