@@ -60,7 +60,10 @@ public class HANABiMain extends PApplet {
 
 			int x = rand.nextInt(500);
 			int speed = rand.nextInt(3) + 1;
-			hanabis.add(new HANABi(x, height, speed));
+			int r = rand.nextInt(255);
+			int g = rand.nextInt(255);
+			int b = rand.nextInt(255);
+			hanabis.add(new HANABi(x, height, r, g, b, speed));
 		}
 	}
 	
