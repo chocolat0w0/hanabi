@@ -11,7 +11,7 @@ public class HANABiMain extends PApplet {
 	private static final int WINDOW_SIZE = 500;
 	private static final int FRAME_RATE = 30;
 	ViewController viewController = null;
-	ArrayList<HANABi> hanabi = new ArrayList<HANABi>();
+	ArrayList<HANABi> hanabis = new ArrayList<HANABi>();
 	private int time = 0;
 
 	public void setup() {
@@ -30,17 +30,17 @@ public class HANABiMain extends PApplet {
 
 		_killHanabi();
 
-		viewController.drawHanabi(hanabi);
+		viewController.drawHanabi(hanabis);
 		
 		_moveAllHanabi();
 	}
 
 	public void mousePressed() {
-		for (HANABi h : hanabi) {
+		for (HANABi h : hanabis) {
 			if ((h.x - 10) < mouseX && mouseX < (h.x + 10)
 					&& (h.y - 10) < mouseY && mouseY < (h.y + 10)) {
 				h.catched = true;
-				viewController.catchHanabi(h);
+				viewController.drawCatchHanabi(h);
 			}
 		}
 	}
@@ -60,21 +60,21 @@ public class HANABiMain extends PApplet {
 
 			int x = rand.nextInt(500);
 			int speed = rand.nextInt(3) + 1;
-			hanabi.add(new HANABi(x, height, speed));
+			hanabis.add(new HANABi(x, height, speed));
 		}
 	}
 	
 	private void _killHanabi() {
 		
-		for (int i = hanabi.size() - 1; i >= 0; i--) {
-			if (!hanabi.get(i).isAlive()) {
-				hanabi.remove(i);
+		for (int i = hanabis.size() - 1; i >= 0; i--) {
+			if (!hanabis.get(i).isAlive()) {
+				hanabis.remove(i);
 			}
 		}
 	}
 	
 	private void _moveAllHanabi() {
-		for (HANABi h : hanabi) {
+		for (HANABi h : hanabis) {
 			h.move();
 		}
 	}
@@ -85,10 +85,10 @@ public class HANABiMain extends PApplet {
 			return;
 		}
 		
-		for (int i = hanabi.size() - 1; i >= 0; i--) {
-			if (hanabi.get(i).catched) {
-				viewController.explode(hanabi.get(i));
-				hanabi.remove(i);
+		for (int i = hanabis.size() - 1; i >= 0; i--) {
+			if (hanabis.get(i).catched) {
+				viewController.explode(hanabis.get(i));
+				hanabis.remove(i);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ public class HANABiMain extends PApplet {
 	private boolean _isExplodable() {
 		
 		int count = 0;
-		for (HANABi h : hanabi) {
+		for (HANABi h : hanabis) {
 			if (h.catched) {
 				count++;
 			}

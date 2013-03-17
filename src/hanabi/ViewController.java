@@ -1,6 +1,7 @@
 package hanabi;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import processing.core.PApplet;
 
@@ -10,6 +11,7 @@ public class ViewController {
 
 	PApplet parent;
 	private ArrayList<ExplodeHanabi> explodeHanabis = new ArrayList<ExplodeHanabi>();
+	Iterator<ExplodeHanabi> iter = explodeHanabis.iterator();
 	
 	public ViewController(PApplet parent) {
 		this.parent = parent;
@@ -20,6 +22,11 @@ public class ViewController {
 	}
 	
 	public void drawHanabi(ArrayList<HANABi> hanabi) {
+		_drawShotHanabis(hanabi);
+		_drawExplodeHanabis();
+	}
+
+	private void _drawShotHanabis(ArrayList<HANABi> hanabi) {
 		for (HANABi h : hanabi) {
 			parent.noStroke();
 			if(h.catched == true) {
@@ -30,19 +37,24 @@ public class ViewController {
 			}
 			parent.ellipse(h.x, h.y, 30, 30);
 		}
+	}
 
-		for (int i = explodeHanabis.size() - 1; i >= 0; i--) {
-			boolean explodable = explodeHanabis.get(i).update();
+	private void _drawExplodeHanabis() {
+		iter = explodeHanabis.iterator();
+		ExplodeHanabi explodeHanabi;
+		while (iter.hasNext()) {
+			explodeHanabi = iter.next();
+			boolean explodable = explodeHanabi.update();
 			if (explodable) {
-				explodeHanabis.get(i).drawSparks();
+				explodeHanabi.drawSparks();
 			}
 			else {
-				explodeHanabis.remove(i);
+				iter.remove();
 			}
 		}
 	}
 
-	public void catchHanabi(HANABi hanabi) {
+	public void drawCatchHanabi(HANABi hanabi) {
 		parent.fill(0);
 		parent.ellipse(hanabi.x, hanabi.y, 30, 30);
 	}
