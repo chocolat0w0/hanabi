@@ -50,6 +50,15 @@ public class HANABiMain extends PApplet {
 		if (key == ' ') {
 			_explodeHanabi();
 		}
+		
+		if (key == 'a') {
+			for (int i = hanabis.size() - 1; i >= 0; i--) {
+				if (hanabis.get(i).catched) {
+					viewController.explode(hanabis.get(i));
+					hanabis.remove(i);
+				}
+			}
+		}
 	}
 
 	private void _createHanabi() {
@@ -60,9 +69,9 @@ public class HANABiMain extends PApplet {
 
 			int x = rand.nextInt(500);
 			int speed = rand.nextInt(3) + 1;
-			int r = rand.nextInt(255);
-			int g = rand.nextInt(255);
-			int b = rand.nextInt(255);
+			int r = rand.nextInt(180) + 75;
+			int g = rand.nextInt(180) + 75;
+			int b = rand.nextInt(180) + 75;
 			hanabis.add(new HANABi(x, height, r, g, b, speed));
 		}
 	}
