@@ -13,6 +13,8 @@ public class HANABiMain extends PApplet {
 	private static final int FRAME_RATE = 30;
 
 	private int time = 0;
+	private int score = 0;
+	private int totalScore = 0;
 	private ViewController viewController = null;
 	private ArrayList<HANABi> hanabis = new ArrayList<HANABi>();
 	private PImage yakei = loadImage("yakei.jpeg");
@@ -37,6 +39,11 @@ public class HANABiMain extends PApplet {
 		viewController.drawHanabi(hanabis);
 
 		_moveAllHanabi();
+		
+		fill(255);
+		textSize(16);
+		text(totalScore, 10, 20);
+		text(score, 10, 40);
 	}
 
 	public void mousePressed() {
@@ -116,12 +123,20 @@ public class HANABiMain extends PApplet {
 			return;
 		}
 
+		score = 0;
 		for (int i = hanabis.size() - 1; i >= 0; i--) {
 			if (hanabis.get(i).catched) {
+				_calcPoint(hanabis.get(i));
+
 				viewController.explode(hanabis.get(i));
 				hanabis.remove(i);
 			}
 		}
+	}
+	
+	private void _calcPoint(HANABi hanabi) {
+		score = score + hanabi.y * hanabi.radius * hanabi.speed / 100;
+		totalScore = totalScore + score;
 	}
 
 	private boolean _isExplodable() {
