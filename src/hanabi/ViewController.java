@@ -42,7 +42,7 @@ public class ViewController {
 		ExplodeHanabi explodeHanabi;
 		while (iter.hasNext()) {
 			explodeHanabi = iter.next();
-			boolean explodable = explodeHanabi.update();
+			boolean explodable = explodeHanabi.updateSparks();
 			if (explodable) {
 				explodeHanabi.drawSparks();
 			}
@@ -51,7 +51,7 @@ public class ViewController {
 			}
 		}
 	}
-
+	
 	public void drawCatchHanabi(HANABi hanabi) {
 		parent.fill(hanabi.r + 20, hanabi.g + 20, hanabi.b + 20);
 		parent.ellipse(hanabi.x, hanabi.y, hanabi.radius * 2, hanabi.radius * 2);
