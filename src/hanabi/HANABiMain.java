@@ -31,7 +31,7 @@ public class HANABiMain extends PApplet {
 
 		_createHanabi();
 
-		_killHanabi();
+		_killDeadHanabi();
 
 		viewController.drawHanabi(hanabis);
 
@@ -79,7 +79,7 @@ public class HANABiMain extends PApplet {
 		}
 	}
 
-	private void _killHanabi() {
+	private void _killDeadHanabi() {
 
 		for (int i = hanabis.size() - 1; i >= 0; i--) {
 			if (!hanabis.get(i).isAlive()) {
