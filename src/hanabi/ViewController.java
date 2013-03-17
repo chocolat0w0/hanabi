@@ -55,10 +55,10 @@ public class ViewController {
 	}
 
 	public void drawCatchHanabi(HANABi hanabi) {
+		parent.fill(hanabi.r + 20, hanabi.g + 20, hanabi.b + 20);
+		parent.ellipse(hanabi.x, hanabi.y, RADIUS * 2, RADIUS * 2);
 		parent.noFill();
 		parent.stroke(255, 0, 0);
 		parent.rect(hanabi.x - RADIUS, hanabi.y - RADIUS, RADIUS * 2, RADIUS * 2);
-		parent.fill(100);
-		parent.ellipse(hanabi.x, hanabi.y, RADIUS * 2, RADIUS * 2);
 	}
 }
