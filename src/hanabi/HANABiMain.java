@@ -11,10 +11,11 @@ public class HANABiMain extends PApplet {
 	private static final int INTERVAL = 20;
 	private static final int WINDOW_SIZE = 500;
 	private static final int FRAME_RATE = 30;
-	ViewController viewController = null;
-	ArrayList<HANABi> hanabis = new ArrayList<HANABi>();
+
 	private int time = 0;
-	private PImage image = loadImage("yakei.jpeg");
+	private ViewController viewController = null;
+	private ArrayList<HANABi> hanabis = new ArrayList<HANABi>();
+	private PImage yakei = loadImage("yakei.jpeg");
 
 	public void setup() {
 		viewController = new ViewController(this);
@@ -25,7 +26,7 @@ public class HANABiMain extends PApplet {
 
 	public void draw() {
 		tint(255, 50);
-		image(image, 0, 0, 500, 500);
+		image(yakei, 0, 0, 500, 500);
 		fill(BACKGROUND_GRAY, 30);
 		rect(0, 0, width, height);
 
@@ -40,8 +41,8 @@ public class HANABiMain extends PApplet {
 
 	public void mousePressed() {
 		for (HANABi h : hanabis) {
-			if ((h.x - 10) < mouseX && mouseX < (h.x + 10)
-					&& (h.y - 10) < mouseY && mouseY < (h.y + 10)) {
+			if ((h.x - h.radius) < mouseX && mouseX < (h.x + h.radius)
+					&& (h.y - h.radius) < mouseY && mouseY < (h.y + h.radius)) {
 				h.catched = true;
 				viewController.drawCatchHanabi(h);
 			}
@@ -53,7 +54,7 @@ public class HANABiMain extends PApplet {
 		if (key == ' ') {
 			_explodeHanabi();
 		}
-		
+
 		if (key == 'a') {
 			for (int i = hanabis.size() - 1; i >= 0; i--) {
 				if (hanabis.get(i).catched) {
@@ -66,23 +67,32 @@ public class HANABiMain extends PApplet {
 
 	private void _createHanabi() {
 		time++;
-		if (time % INTERVAL == 0) {
-
-			Random rand = new Random();
-
-			int x = rand.nextInt(500);
-			int speed = rand.nextInt(3) + 1;
-			
-			int r = rand.nextInt(2);
-			int g = rand.nextInt(2);
-			int b = rand.nextInt(2);
-			while (r == 0 && g == 0 && b == 0) {
-				r = rand.nextInt(2);
-				g = rand.nextInt(2);
-				b = rand.nextInt(2);
-			}
-			hanabis.add(new HANABi(x, height, r * 255 + 100, g * 255 + 100, b * 255 + 100, speed));
+		if (time % INTERVAL != 0) {
+			return;
 		}
+
+		Random rand = new Random();
+
+		int x = rand.nextInt(500);
+		int radius = rand.nextInt(4) + 6;
+		int speed = rand.nextInt(3) + 1;
+		int sparkSize = rand.nextInt(8) + 5;
+
+		int r = rand.nextInt(2);
+		int g = rand.nextInt(2);
+		int b = rand.nextInt(2);
+		
+		while (r == 0 && g == 0 && b == 0) {
+			r = rand.nextInt(2);
+			g = rand.nextInt(2);
+			b = rand.nextInt(2);
+		}
+		
+		r = r * 255 + 100;
+		g = g * 255 + 100;
+		b = b * 255 + 100;
+				
+		hanabis.add(new HANABi(x, height, radius * 2, r, g, b, sparkSize, speed));
 	}
 
 	private void _killDeadHanabi() {
