@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class HANABiMain extends PApplet {
 	private static final int BACKGROUND_GRAY = 80;
@@ -13,6 +14,7 @@ public class HANABiMain extends PApplet {
 	ViewController viewController = null;
 	ArrayList<HANABi> hanabis = new ArrayList<HANABi>();
 	private int time = 0;
+	private PImage image = loadImage("yakei.jpeg");
 
 	public void setup() {
 		viewController = new ViewController(this);
@@ -22,16 +24,17 @@ public class HANABiMain extends PApplet {
 	}
 
 	public void draw() {
-		
+		image(image, 0, 0, 500, 500);
+
 		fill(BACKGROUND_GRAY, 30);
 		rect(0, 0, width, height);
-		
+
 		_createHanabi();
 
 		_killHanabi();
 
 		viewController.drawHanabi(hanabis);
-		
+
 		_moveAllHanabi();
 	}
 
@@ -50,8 +53,8 @@ public class HANABiMain extends PApplet {
 		if (key == ' ') {
 			_explodeHanabi();
 		}
-		
-		//?f?o?b?O?p?̃R?s?y?R?[?h
+
+		// ?f?o?b?O?p?̃R?s?y?R?[?h
 		if (key == 'a') {
 			for (int i = hanabis.size() - 1; i >= 0; i--) {
 				if (hanabis.get(i).catched) {
@@ -76,28 +79,28 @@ public class HANABiMain extends PApplet {
 			hanabis.add(new HANABi(x, height, r, g, b, speed));
 		}
 	}
-	
+
 	private void _killHanabi() {
-		
+
 		for (int i = hanabis.size() - 1; i >= 0; i--) {
 			if (!hanabis.get(i).isAlive()) {
 				hanabis.remove(i);
 			}
 		}
 	}
-	
+
 	private void _moveAllHanabi() {
 		for (HANABi h : hanabis) {
 			h.move();
 		}
 	}
-	
+
 	private void _explodeHanabi() {
-		
+
 		if (!_isExplodable()) {
 			return;
 		}
-		
+
 		for (int i = hanabis.size() - 1; i >= 0; i--) {
 			if (hanabis.get(i).catched) {
 				viewController.explode(hanabis.get(i));
@@ -105,16 +108,16 @@ public class HANABiMain extends PApplet {
 			}
 		}
 	}
-	
+
 	private boolean _isExplodable() {
-		
+
 		int count = 0;
 		for (HANABi h : hanabis) {
 			if (h.catched) {
 				count++;
 			}
 		}
-		
+
 		if (count > 2) {
 			return true;
 		}
